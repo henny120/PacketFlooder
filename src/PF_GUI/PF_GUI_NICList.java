@@ -75,11 +75,11 @@ public class PF_GUI_NICList extends JList {
 		key = nic.substring(nic.indexOf("\n"), nic.length());
 		value = nic.substring(0, nic.indexOf("\n"));
 	
-		//공백제거
+		// 공백제거
 		key = key.trim();
 		value = value.trim();
 		
-		//key value 지정
+		// key value 지정
 		m_Map_Device.put(key, value);
 		
 		// List 에 추가

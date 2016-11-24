@@ -3,6 +3,8 @@ package PF_GUI;
 import javax.swing.JFrame;
 
 import EventListener.PF_ActionListener;
+import EventListener.PF_ChangeListener;
+import EventListener.PF_KeyListener;
 
 
 /**
@@ -33,7 +35,10 @@ public class PF_GUI extends JFrame
 	{
 		// Jframe 구성과, OS확인 
 		init();
-				
+		
+		// Listener 등록 
+		add_listener();
+		
 		
 	} // 생성자 end
 	
@@ -138,8 +143,39 @@ public class PF_GUI extends JFrame
 		// Stop btn 등록
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_btn_flooder_Stop);
 		
-		
 	}
 	
+	/**
+	 * Event Listener를 추가 시키는 메소드
+	 * EventListener 패키지에 Listener 종류들이 존재 한다.
+	 */
+	private void add_listener()
+	{
+		// Start 버튼에 이벤트 등록 
+		m_RESOURCE.m_btn_flooder_Start.addActionListener(new PF_ActionListener());
+		
+		// Stop 버튼에 이벤트 등록 
+		m_RESOURCE.m_btn_flooder_Stop.addActionListener(new PF_ActionListener());
+		
+		// Speed 텍스트필드에 입력(숫자) 유효성 체크 이벤트 등록
+		m_RESOURCE.m_tf_speed.addKeyListener(new PF_KeyListener());
+		
+		// Speed 슬라이더에 이벤트 등록
+		m_RESOURCE.m_slider_speed.addChangeListener(new PF_ChangeListener());
+		
+		
+		/*
+		.addChangeListener(new SliderListener());
+		...
+		class SliderListener implements ChangeListener {
+		    public void stateChanged(ChangeEvent e) {
+		        JSlider source = (JSlider)e.getSource();
+		        if (!source.getValueIsAdjusting()) {
+		            int fps = (int)source.getValue();
+		            ...
+		        }    
+		    }
+		}*/
+	}
 
 }

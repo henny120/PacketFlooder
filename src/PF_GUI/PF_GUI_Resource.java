@@ -210,7 +210,7 @@ public class PF_GUI_Resource
 		// 전송제어 스피드 입력창 설정
 		m_tf_speed.setBounds(47, 230, 58, 21);
 		m_tf_speed.setBackground(SystemColor.info);
-		m_tf_speed.setColumns(10);
+		m_tf_speed.setColumns(6);
 		m_tf_speed.setText(String.valueOf(m_slider_speed.getValue()));
 		
 		
