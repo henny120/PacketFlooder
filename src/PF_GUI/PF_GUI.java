@@ -13,18 +13,18 @@ import EventListener.PF_KeyListener;
  * @version 1.0.0
  * @since 16.11.16
  * 
- * PF_GUI_RESOURCE¿Í ¿¬°èµÇ¾î¼­ ½ÇÁ¦·Î JFrame¸¦ ¸¸µå´Â Å¬·¡½º
- * RESOURCE´Â Å¬·¡½º´Â ¸ğµÎ PF_GUI_RESOURCE¿¡¼­ SINGLETONÀ¸·Î ¹ŞÀ¸¸ç ¸®½º³Ê µî·Ï°ú È­¸éÀ» »ı¼ºÇÑ´Ù.
+ * PF_GUI_RESOURCEì™€ ì—°ê³„ë˜ì–´ì„œ ì‹¤ì œë¡œ JFrameë¥¼ ë§Œë“œëŠ” í´ë˜ìŠ¤
+ * RESOURCEëŠ” í´ë˜ìŠ¤ëŠ” ëª¨ë‘ PF_GUI_RESOURCEì—ì„œ SINGLETONìœ¼ë¡œ ë°›ìœ¼ë©° ë¦¬ìŠ¤ë„ˆ ë“±ë¡ê³¼ í™”ë©´ì„ ìƒì„±í•œë‹¤.
  *
  */
 
 public class PF_GUI extends JFrame
 {
-	/** PF_GUI_ResourceÅ¬·¡½ºÀÇ ½Ì±ÛÅæ °´Ã¼ **/
+	/** PF_GUI_Resourceí´ë˜ìŠ¤ì˜ ì‹±ê¸€í†¤ ê°ì²´ **/
 	private static final PF_GUI_Resource m_RESOURCE;
 
 	
-	/** static ¿µ¿ª È£Ãâ **/
+	/** static ì˜ì—­ í˜¸ì¶œ **/
 	static
 	{
 		m_RESOURCE = PF_GUI_Resource.get_Instance();
@@ -33,149 +33,136 @@ public class PF_GUI extends JFrame
 	
 	public PF_GUI()
 	{
-		// Jframe ±¸¼º°ú, OSÈ®ÀÎ 
+		// Jframe êµ¬ì„±ê³¼, OSí™•ì¸ 
 		init();
 		
-		// Listener µî·Ï 
+		// Listener ë“±ë¡ 
 		add_listener();
 		
 		
-	} // »ı¼ºÀÚ end
+	} // ìƒì„±ì end
 	
 	
 	/**
-	 * GUIÀÇ Resource¸¦ È£Ãâ ÇÏ¿© ¼ÂÆÃÇÏ´Â Method
+	 * GUIì˜ Resourceë¥¼ í˜¸ì¶œ í•˜ì—¬ ì…‹íŒ…í•˜ëŠ” Method
 	 */
 	private void init()
 	{
-		// Å¸ÀÌÆ² ÁöÁ¤
+		// íƒ€ì´í‹€ ì§€ì •
 		String os = System.getProperty("os.name");
 		if (os.indexOf("Win") != -1) 
-		{ // À©µµ¿ìÀÇ °æ¿ì
+		{ // ìœˆë„ìš°ì˜ ê²½ìš°
 			this.setTitle("Packet Flooder. Window ver @myeonguni.com");
 		} 
 		else if (os.indexOf("Lin") != -1) 
-		{ // ¸®´ª½ºÀÇ °æ¿ì
+		{ // ë¦¬ëˆ…ìŠ¤ì˜ ê²½ìš°
 			this.setTitle("Packet Flooder. Linux ver @myeonguni.com");
 		}
 		
 		
-		// Jframe ¼³Á¤ 
+		// Jframe ì„¤ì • 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setBounds(100, 100, 425, 400);
 		this.setContentPane(m_RESOURCE.m_contentPane);
 		
 		
-		// Protocol Type label µî·Ï
+		// Protocol Type label ë“±ë¡
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_lbl_protocolType);
 		
-		// TCP Protocol Radio btn µî·Ï
+		// TCP Protocol Radio btn ë“±ë¡
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_rdbtn_tcp);
 		
-		// UDP Protocol Radio btn µî·Ï
+		// UDP Protocol Radio btn ë“±ë¡
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_rdbtn_udp);
 		
-		// ARP Protocol Radio btn µî·Ï
+		// ARP Protocol Radio btn ë“±ë¡
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_rdbtn_arp);
 		
-		// ICMP Protocol Radio btn µî·Ï
+		// ICMP Protocol Radio btn ë“±ë¡
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_rdbtn_icmp);
 		
-		// IGMP Protocol Radio btn µî·Ï
+		// IGMP Protocol Radio btn ë“±ë¡
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_rdbtn_igmp);
 		
 		
-		// NIC list label µî·Ï
+		// NIC list label ë“±ë¡
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_lbl_NIC);
 
-		// NIC list µî·Ï
+		// NIC list ë“±ë¡
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_NIC_scroll);
 		
 		
-		// Destination label µî·Ï
+		// Destination label ë“±ë¡
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_lbl_destination);
 		
-		// IP Address label µî·Ï
+		// IP Address label ë“±ë¡
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_lbl_ip);
 		
-		// IP Address Text Field µî·Ï
+		// IP Address Text Field ë“±ë¡
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_tf_ip);
 		
-		// Port Number label µî·Ï
+		// Port Number label ë“±ë¡
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_lbl_port);
 
-		// Port Number Text Field µî·Ï
+		// Port Number Text Field ë“±ë¡
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_tf_port);
 		
 
-		// Transmission control label µî·Ï
+		// Transmission control label ë“±ë¡
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_lbl_transmission);
 
-		// speed label µî·Ï		
+		// speed label ë“±ë¡		
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_lbl_speed);
 
-		// speed Text Field µî·Ï
+		// speed Text Field ë“±ë¡
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_tf_speed);
 
-		// speed slider µî·Ï
+		// speed slider ë“±ë¡
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_slider_speed);
 
 		
-		// Status label µî·Ï
+		// Status label ë“±ë¡
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_lbl_status);
 		
-		// Packets send label µî·Ï
+		// Packets send label ë“±ë¡
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_lbl_sendPacketsLbl);
 		
-		// Packets send value label µî·Ï
+		// Packets send value label ë“±ë¡
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_lbl_sendPackets);
 		
-		// Seconds elapsed label µî·Ï
+		// Seconds elapsed label ë“±ë¡
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_lbl_elapsedSecondsLbl);
 
-		// Seconds elapsed value label µî·Ï
+		// Seconds elapsed value label ë“±ë¡
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_lbl_elapsedSeconds);
 
 		
-		// Start btn µî·Ï
+		// Start btn ë“±ë¡
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_btn_flooder_Start);
 		
-		// Stop btn µî·Ï
+		// Stop btn ë“±ë¡
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_btn_flooder_Stop);
 		
 	}
 	
 	/**
-	 * Event Listener¸¦ Ãß°¡ ½ÃÅ°´Â ¸Ş¼Òµå
-	 * EventListener ÆĞÅ°Áö¿¡ Listener Á¾·ùµéÀÌ Á¸Àç ÇÑ´Ù.
+	 * Event Listenerë¥¼ ì¶”ê°€ ì‹œí‚¤ëŠ” ë©”ì†Œë“œ
+	 * EventListener íŒ¨í‚¤ì§€ì— Listener ì¢…ë¥˜ë“¤ì´ ì¡´ì¬ í•œë‹¤.
 	 */
 	private void add_listener()
 	{
-		// Start ¹öÆ°¿¡ ÀÌº¥Æ® µî·Ï 
+		// Start ë²„íŠ¼ì— ì´ë²¤íŠ¸ ë“±ë¡ 
 		m_RESOURCE.m_btn_flooder_Start.addActionListener(new PF_ActionListener());
 		
-		// Stop ¹öÆ°¿¡ ÀÌº¥Æ® µî·Ï 
+		// Stop ë²„íŠ¼ì— ì´ë²¤íŠ¸ ë“±ë¡ 
 		m_RESOURCE.m_btn_flooder_Stop.addActionListener(new PF_ActionListener());
 		
-		// Speed ÅØ½ºÆ®ÇÊµå¿¡ ÀÔ·Â(¼ıÀÚ) À¯È¿¼º Ã¼Å© ÀÌº¥Æ® µî·Ï
+		// Speed í…ìŠ¤íŠ¸í•„ë“œì— ì…ë ¥(ìˆ«ì) ìœ íš¨ì„± ì²´í¬ ì´ë²¤íŠ¸ ë“±ë¡
 		m_RESOURCE.m_tf_speed.addKeyListener(new PF_KeyListener());
 		
-		// Speed ½½¶óÀÌ´õ¿¡ ÀÌº¥Æ® µî·Ï
+		// Speed ìŠ¬ë¼ì´ë”ì— ì´ë²¤íŠ¸ ë“±ë¡
 		m_RESOURCE.m_slider_speed.addChangeListener(new PF_ChangeListener());
 		
-		
-		/*
-		.addChangeListener(new SliderListener());
-		...
-		class SliderListener implements ChangeListener {
-		    public void stateChanged(ChangeEvent e) {
-		        JSlider source = (JSlider)e.getSource();
-		        if (!source.getValueIsAdjusting()) {
-		            int fps = (int)source.getValue();
-		            ...
-		        }    
-		    }
-		}*/
 	}
 
 }
