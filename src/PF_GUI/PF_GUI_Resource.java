@@ -46,14 +46,14 @@ public class PF_GUI_Resource
 	/** 프로토콜 타입 : UDP 라디오 버튼 **/
 	public JRadioButton m_rdbtn_udp = new JRadioButton("UDP");
 
-	/** 프로토콜 타입 : ARP 라디오 버튼 **/
-	public JRadioButton m_rdbtn_arp = new JRadioButton("ARP");
+	/** 프로토콜 타입 : null1 라디오 버튼 **/
+	public JRadioButton m_rdbtn_null1 = new JRadioButton("null1");
 	
-	/** 프로토콜 타입 : ICMP 라디오 버튼 **/
-	public JRadioButton m_rdbtn_icmp = new JRadioButton("ICMP");
+	/** 프로토콜 타입 : null2 라디오 버튼 **/
+	public JRadioButton m_rdbtn_null2 = new JRadioButton("null2");
 
-	/** 프로토콜 타입 : IGMP 라디오 버튼 **/
-	public JRadioButton m_rdbtn_igmp = new JRadioButton("IGMP");
+	/** 프로토콜 타입 : null3 라디오 버튼 **/
+	public JRadioButton m_rdbtn_null3 = new JRadioButton("null3");
 
 
 	/** 네트워크 디바이스 라벨 **/
@@ -143,16 +143,16 @@ public class PF_GUI_Resource
 		// 각 프로토콜 라디오버튼 그룹에 추가
 		m_rdbtnGroup_protocolType.add(m_rdbtn_tcp);
 		m_rdbtnGroup_protocolType.add(m_rdbtn_udp);
-		m_rdbtnGroup_protocolType.add(m_rdbtn_arp);
-		m_rdbtnGroup_protocolType.add(m_rdbtn_icmp);
-		m_rdbtnGroup_protocolType.add(m_rdbtn_igmp);
+		m_rdbtnGroup_protocolType.add(m_rdbtn_null1);
+		m_rdbtnGroup_protocolType.add(m_rdbtn_null2);
+		m_rdbtnGroup_protocolType.add(m_rdbtn_null3);
 		
 		// 각 프로토콜 라디오 버튼 설정
 		m_rdbtn_tcp.setBounds(103, 10, 51, 23);
 		m_rdbtn_udp.setBounds(160, 10, 51, 23);
-		m_rdbtn_arp.setBounds(217, 10, 51, 23);
-		m_rdbtn_icmp.setBounds(274, 10, 57, 23);
-		m_rdbtn_igmp.setBounds(339, 10, 57, 23);
+		m_rdbtn_null1.setBounds(217, 10, 51, 23);
+		m_rdbtn_null2.setBounds(274, 10, 57, 23);
+		m_rdbtn_null3.setBounds(339, 10, 57, 23);
 		
 		// 초기 프로토콜 선택 설정
 		m_rdbtn_tcp.setSelected(true);

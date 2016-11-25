@@ -12,7 +12,7 @@ import PF_GUI.PF_GUI;
  * @author Myeong-Un Ryu
  * @version 1.0.0
  * @since 16.11.16
- *
+ * https://github.com/mgodave/Jpcap Âü°í
  */
 
 public class Main {

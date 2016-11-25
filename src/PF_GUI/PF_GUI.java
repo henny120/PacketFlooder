@@ -13,18 +13,18 @@ import EventListener.PF_KeyListener;
  * @version 1.0.0
  * @since 16.11.16
  * 
- * PF_GUI_RESOURCEì™€ ì—°ê³„ë˜ì–´ì„œ ì‹¤ì œë¡œ JFrameë¥¼ ë§Œë“œëŠ” í´ë˜ìŠ¤
- * RESOURCEëŠ” í´ë˜ìŠ¤ëŠ” ëª¨ë‘ PF_GUI_RESOURCEì—ì„œ SINGLETONìœ¼ë¡œ ë°›ìœ¼ë©° ë¦¬ìŠ¤ë„ˆ ë“±ë¡ê³¼ í™”ë©´ì„ ìƒì„±í•œë‹¤.
+ * PF_GUI_RESOURCE¿Í ¿¬°èµÇ¾î¼­ ½ÇÁ¦·Î JFrame¸¦ ¸¸µå´Â Å¬·¡½º
+ * RESOURCE´Â Å¬·¡½º´Â ¸ğµÎ PF_GUI_RESOURCE¿¡¼­ SINGLETONÀ¸·Î ¹ŞÀ¸¸ç ¸®½º³Ê µî·Ï°ú È­¸éÀ» »ı¼ºÇÑ´Ù.
  *
  */
 
 public class PF_GUI extends JFrame
 {
-	/** PF_GUI_Resourceí´ë˜ìŠ¤ì˜ ì‹±ê¸€í†¤ ê°ì²´ **/
+	/** PF_GUI_ResourceÅ¬·¡½ºÀÇ ½Ì±ÛÅæ °´Ã¼ **/
 	private static final PF_GUI_Resource m_RESOURCE;
 
 	
-	/** static ì˜ì—­ í˜¸ì¶œ **/
+	/** static ¿µ¿ª È£Ãâ **/
 	static
 	{
 		m_RESOURCE = PF_GUI_Resource.get_Instance();
@@ -33,136 +33,149 @@ public class PF_GUI extends JFrame
 	
 	public PF_GUI()
 	{
-		// Jframe êµ¬ì„±ê³¼, OSí™•ì¸ 
+		// Jframe ±¸¼º°ú, OSÈ®ÀÎ 
 		init();
 		
-		// Listener ë“±ë¡ 
+		// Listener µî·Ï 
 		add_listener();
 		
 		
-	} // ìƒì„±ì end
+	} // »ı¼ºÀÚ end
 	
 	
 	/**
-	 * GUIì˜ Resourceë¥¼ í˜¸ì¶œ í•˜ì—¬ ì…‹íŒ…í•˜ëŠ” Method
+	 * GUIÀÇ Resource¸¦ È£Ãâ ÇÏ¿© ¼ÂÆÃÇÏ´Â Method
 	 */
 	private void init()
 	{
-		// íƒ€ì´í‹€ ì§€ì •
+		// Å¸ÀÌÆ² ÁöÁ¤
 		String os = System.getProperty("os.name");
 		if (os.indexOf("Win") != -1) 
-		{ // ìœˆë„ìš°ì˜ ê²½ìš°
+		{ // À©µµ¿ìÀÇ °æ¿ì
 			this.setTitle("Packet Flooder. Window ver @myeonguni.com");
 		} 
 		else if (os.indexOf("Lin") != -1) 
-		{ // ë¦¬ëˆ…ìŠ¤ì˜ ê²½ìš°
+		{ // ¸®´ª½ºÀÇ °æ¿ì
 			this.setTitle("Packet Flooder. Linux ver @myeonguni.com");
 		}
 		
 		
-		// Jframe ì„¤ì • 
+		// Jframe ¼³Á¤ 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setBounds(100, 100, 425, 400);
 		this.setContentPane(m_RESOURCE.m_contentPane);
 		
 		
-		// Protocol Type label ë“±ë¡
+		// Protocol Type label µî·Ï
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_lbl_protocolType);
 		
-		// TCP Protocol Radio btn ë“±ë¡
+		// TCP Protocol Radio btn µî·Ï
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_rdbtn_tcp);
 		
-		// UDP Protocol Radio btn ë“±ë¡
+		// UDP Protocol Radio btn µî·Ï
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_rdbtn_udp);
 		
-		// ARP Protocol Radio btn ë“±ë¡
-		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_rdbtn_arp);
+		// null1 Protocol Radio btn µî·Ï
+		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_rdbtn_null1);
 		
-		// ICMP Protocol Radio btn ë“±ë¡
-		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_rdbtn_icmp);
+		// null2 Protocol Radio btn µî·Ï
+		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_rdbtn_null2);
 		
-		// IGMP Protocol Radio btn ë“±ë¡
-		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_rdbtn_igmp);
+		// null3 Protocol Radio btn µî·Ï
+		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_rdbtn_null3);
 		
 		
-		// NIC list label ë“±ë¡
+		// NIC list label µî·Ï
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_lbl_NIC);
 
-		// NIC list ë“±ë¡
+		// NIC list µî·Ï
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_NIC_scroll);
 		
 		
-		// Destination label ë“±ë¡
+		// Destination label µî·Ï
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_lbl_destination);
 		
-		// IP Address label ë“±ë¡
+		// IP Address label µî·Ï
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_lbl_ip);
 		
-		// IP Address Text Field ë“±ë¡
+		// IP Address Text Field µî·Ï
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_tf_ip);
 		
-		// Port Number label ë“±ë¡
+		// Port Number label µî·Ï
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_lbl_port);
 
-		// Port Number Text Field ë“±ë¡
+		// Port Number Text Field µî·Ï
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_tf_port);
 		
 
-		// Transmission control label ë“±ë¡
+		// Transmission control label µî·Ï
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_lbl_transmission);
 
-		// speed label ë“±ë¡		
+		// speed label µî·Ï		
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_lbl_speed);
 
-		// speed Text Field ë“±ë¡
+		// speed Text Field µî·Ï
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_tf_speed);
 
-		// speed slider ë“±ë¡
+		// speed slider µî·Ï
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_slider_speed);
 
 		
-		// Status label ë“±ë¡
+		// Status label µî·Ï
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_lbl_status);
 		
-		// Packets send label ë“±ë¡
+		// Packets send label µî·Ï
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_lbl_sendPacketsLbl);
 		
-		// Packets send value label ë“±ë¡
+		// Packets send value label µî·Ï
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_lbl_sendPackets);
 		
-		// Seconds elapsed label ë“±ë¡
+		// Seconds elapsed label µî·Ï
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_lbl_elapsedSecondsLbl);
 
-		// Seconds elapsed value label ë“±ë¡
+		// Seconds elapsed value label µî·Ï
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_lbl_elapsedSeconds);
 
 		
-		// Start btn ë“±ë¡
+		// Start btn µî·Ï
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_btn_flooder_Start);
 		
-		// Stop btn ë“±ë¡
+		// Stop btn µî·Ï
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_btn_flooder_Stop);
 		
 	}
 	
 	/**
-	 * Event Listenerë¥¼ ì¶”ê°€ ì‹œí‚¤ëŠ” ë©”ì†Œë“œ
-	 * EventListener íŒ¨í‚¤ì§€ì— Listener ì¢…ë¥˜ë“¤ì´ ì¡´ì¬ í•œë‹¤.
+	 * Event Listener¸¦ Ãß°¡ ½ÃÅ°´Â ¸Ş¼Òµå
+	 * EventListener ÆĞÅ°Áö¿¡ Listener Á¾·ùµéÀÌ Á¸Àç ÇÑ´Ù.
 	 */
 	private void add_listener()
 	{
-		// Start ë²„íŠ¼ì— ì´ë²¤íŠ¸ ë“±ë¡ 
+		// Start ¹öÆ°¿¡ ÀÌº¥Æ® µî·Ï 
 		m_RESOURCE.m_btn_flooder_Start.addActionListener(new PF_ActionListener());
 		
-		// Stop ë²„íŠ¼ì— ì´ë²¤íŠ¸ ë“±ë¡ 
+		// Stop ¹öÆ°¿¡ ÀÌº¥Æ® µî·Ï 
 		m_RESOURCE.m_btn_flooder_Stop.addActionListener(new PF_ActionListener());
 		
-		// Speed í…ìŠ¤íŠ¸í•„ë“œì— ì…ë ¥(ìˆ«ì) ìœ íš¨ì„± ì²´í¬ ì´ë²¤íŠ¸ ë“±ë¡
+		// Speed ÅØ½ºÆ®ÇÊµå¿¡ ÀÔ·Â(¼ıÀÚ) À¯È¿¼º Ã¼Å© ÀÌº¥Æ® µî·Ï
 		m_RESOURCE.m_tf_speed.addKeyListener(new PF_KeyListener());
 		
-		// Speed ìŠ¬ë¼ì´ë”ì— ì´ë²¤íŠ¸ ë“±ë¡
+		// Speed ½½¶óÀÌ´õ¿¡ ÀÌº¥Æ® µî·Ï
 		m_RESOURCE.m_slider_speed.addChangeListener(new PF_ChangeListener());
 		
+		
+		/*
+		.addChangeListener(new SliderListener());
+		...
+		class SliderListener implements ChangeListener {
+		    public void stateChanged(ChangeEvent e) {
+		        JSlider source = (JSlider)e.getSource();
+		        if (!source.getValueIsAdjusting()) {
+		            int fps = (int)source.getValue();
+		            ...
+		        }    
+		    }
+		}*/
 	}
 
 }

@@ -55,6 +55,8 @@ public class PF_GUI_NICList extends JList {
 
 		for (String nic : devices) {
 			get_NIC_Device_Name(nic);
+			get_NIC_Device_Name(nic);
+			get_NIC_Device_Name(nic);
 		}
 
 		// 모든 Devices의 이름을 받은 후에 List Data 지정
