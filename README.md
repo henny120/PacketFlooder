@@ -19,5 +19,4 @@ jpcap(+winpcap) 을 이용한 PacketFlooder GUI Tool 입니다.
  
 
 # 그 외..
-! 연구, 스터디 목적 외 악의적으로 사용하지 마시기 바랍니다 ()
-@만든이 명우니닷컴(http://myeonguni.com)
+연구, 스터디 목적 외 악의적으로 사용하지 마시기 바랍니다 - 명우니닷컴(http://myeonguni.com)
