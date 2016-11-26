@@ -19,5 +19,5 @@ jpcap(+winpcap) 을 이용한 PacketFlooder GUI Tool 입니다.
  
 
 # 그 외..
-추후 업데이트할 사항 - UDP Flooding Attack 유형에서 사용될 data 사용자정의 기능 추가할 것
-연구, 스터디 목적 외 악의적으로 사용하지 마시기 바랍니다 - 명우니닷컴(http://myeonguni.com)
+1. 추후 업데이트할 사항 - UDP Flooding Attack 유형에서 사용될 data 사용자정의 기능 추가할 것
+2. 연구, 스터디 목적 외 악의적으로 사용하지 마시기 바랍니다 - 명우니닷컴(http://myeonguni.com)
