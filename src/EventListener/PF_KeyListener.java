@@ -19,7 +19,7 @@ public class PF_KeyListener implements KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-
+		
 		/** 입력된 키 값을 가져옴 **/
 		char c = e.getKeyChar();
 

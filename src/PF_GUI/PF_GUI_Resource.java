@@ -224,7 +224,7 @@ public class PF_GUI_Resource
 		m_lbl_sendPacketsLbl.setBounds(61, 290, 162, 15);
 		
 		// 상태 전송 패킷 수 라벨 설정
-		m_lbl_sendPackets.setBounds(177, 290, 22, 15);
+		m_lbl_sendPackets.setBounds(177, 290, 150, 15);
 
 		// 상태 전송 시간 안내 라벨 설정
 		m_lbl_elapsedSecondsLbl.setBounds(61, 310, 105, 15);

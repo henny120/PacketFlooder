@@ -5,8 +5,8 @@ import java.util.HashMap;
 
 import javax.swing.JList;
 
-import net.sourceforge.jpcap.capture.CaptureDeviceLookupException;
-import net.sourceforge.jpcap.capture.PacketCapture;
+import jpcap.JpcapCaptor;
+import jpcap.NetworkInterface;
 
 /**
  * 
@@ -23,8 +23,8 @@ public class PF_GUI_NICList extends JList {
 	private static final PF_GUI_NICList m_List = new PF_GUI_NICList();
 
 	
-	/** KEY : NIC NAME : VALUE : DEVICE NPF  Capture를 위해서는 NPF값이 필요하다.**/
-	public HashMap<String,String> m_Map_Device = new HashMap<String,String>();
+	/** KEY : NIC NAME + DESCRIPTION : VALUE : DEVICE NPF  Capture를 위해서는 NPF값이 필요하다.**/
+	public HashMap<String,NetworkInterface> m_Map_Device = new HashMap<String,NetworkInterface>();
 	
 	
 	/** List 에 Device 이름을 추가하기 위한 배열 **/
@@ -40,7 +40,7 @@ public class PF_GUI_NICList extends JList {
 	public PF_GUI_NICList() {
 		try {
 			get_NIC_Device();
-		} catch (CaptureDeviceLookupException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -49,11 +49,12 @@ public class PF_GUI_NICList extends JList {
 	 * NIC Device를 받아와 리스트에 추가
 	 * @throws CaptureDeviceLookupException 예외처리
 	 */
-	private void get_NIC_Device() throws CaptureDeviceLookupException {
+	private void get_NIC_Device() {
 		// NIC device 정보 받아오기
-		String[] devices = PacketCapture.lookupDevices();
+		NetworkInterface[] devices = JpcapCaptor.getDeviceList();
+		//String[] devices = PacketCapture.lookupDevices();
 
-		for (String nic : devices) {
+		for (NetworkInterface nic : devices) {
 			get_NIC_Device_Name(nic);
 			get_NIC_Device_Name(nic);
 			get_NIC_Device_Name(nic);
@@ -65,28 +66,24 @@ public class PF_GUI_NICList extends JList {
 	
 
 	/**
-	 * library의 버그로 \n이후의 나머지를 모두 없애야 한다.
-	 * @param nic nic 이름을 매개변수로 받아서 처리
+	 * @param nic nic NPF를 매개변수로 받아서 처리
 	 */
-	private void get_NIC_Device_Name(String nic) {
-		// KEY 값으로 NIC의 이름을 설정 하고 List에 추가 
+	private void get_NIC_Device_Name(NetworkInterface nic) {
+		// KEY 값으로 NIC의 name+description을 설정 하고 List에 추가 
 		String key;
-		String value;
+		NetworkInterface value;
 		
 		// key , value 받아오기 
-		key = nic.substring(nic.indexOf("\n"), nic.length());
-		value = nic.substring(0, nic.indexOf("\n"));
-	
-		// 공백제거
-		key = key.trim();
-		value = value.trim();
-		
+		key = nic.description + " " + nic.name.substring(nic.name.indexOf("{"), nic.name.length());
+		value = nic;
+
 		// key value 지정
 		m_Map_Device.put(key, value);
 		
 		// List 에 추가
 		m_List_DeviceName.add(key);
 					
+		System.out.println(key);
 	} // end
 		
 	

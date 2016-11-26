@@ -2,7 +2,6 @@ package EventListener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.Enumeration;
 import java.util.regex.Pattern;
 
@@ -11,8 +10,7 @@ import javax.swing.JOptionPane;
 
 import PF_GUI.PF_GUI_Resource;
 import PacketFlooder.PF_SendTCP;
-import net.sourceforge.jpcap.capture.CaptureDeviceOpenException;
-import net.sourceforge.jpcap.capture.InvalidFilterException;
+import PacketFlooder.PF_SendUDP;
 
 public class PF_ActionListener implements ActionListener {
 
@@ -78,8 +76,24 @@ public class PF_ActionListener implements ActionListener {
 		// Speed 입력 값 설정
 		speed = Integer.parseInt(PF_GUI_Resource.get_Instance().m_tf_speed.getText());
 
+		
 		// Packet Flooder 시작 전 유효성 체크
-		if (!regIp.matcher(ip).matches()) {
+		if (ip.equals("") || port.equals(""))
+		{
+			// IP Address 입력이 없을 경우
+			if (ip.equals(""))
+			{
+		
+			}
+			// Port Number 입력이 없을 경우
+			else
+			{
+				
+			}
+		}
+		// IP Address 입력 값이 유효하지 않을 경우
+		else if (!regIp.matcher(ip).matches())
+		{
 
 			// 에러 메시지 다이어로그 생성
 			JOptionPane.showMessageDialog(null, "입력하신 IP Address 값이 유효하지 않습니다. 확인 후 다시 시도하여 주세요.", "실행 오류",
@@ -88,7 +102,10 @@ public class PF_ActionListener implements ActionListener {
 			// IP Address Text Field 포커스 설정
 			PF_GUI_Resource.get_Instance().m_tf_ip.grabFocus();
 
-		} else if (!regPort.matcher(port).matches()) {
+		}
+		// Port Number 입력 값이 유효하지 않을 경우
+		else if (!regPort.matcher(port).matches())
+		{
 
 			// 에러 메시지 다이어로그 생성
 			JOptionPane.showMessageDialog(null, "입력하신 Port Number 값이 유효하지 않습니다. 확인 후 다시 시도하여 주세요", "실행 오류",
@@ -97,7 +114,10 @@ public class PF_ActionListener implements ActionListener {
 			// Port Number Text Field 포커스 설정
 			PF_GUI_Resource.get_Instance().m_tf_port.grabFocus();
 
-		} else {
+		}
+		// 유효성 체크에 걸리지 않은 경우
+		else
+		{
 
 			// 패킷 전송 시작
 			try {
@@ -116,19 +136,32 @@ public class PF_ActionListener implements ActionListener {
 					break;
 					
 				case "UDP":
-					System.out.println("UDP");
+					if (new PF_SendUDP().set_PF_SendUDP(ip, port, speed)) // BOOLEAN 형태로 리턴 된다.
+					{
+						// 시작 버튼을 비활성화
+						PF_GUI_Resource.get_Instance().m_btn_flooder_Start.setEnabled(false);
+
+						// 정지 버튼을 활성화
+						PF_GUI_Resource.get_Instance().m_btn_flooder_Stop.setEnabled(true);
+					}
 					break;
 					
 				case "null1":
-					System.out.println("ICMP");
+					// 경고 메시지 다이어로그 생성
+					JOptionPane.showMessageDialog(null, "해당 프로토콜은 준비 중입니다.", "준비 중",
+							JOptionPane.ERROR_MESSAGE);
 					break;
 
 				case "null2":
-					System.out.println("ICMP");
+					// 경고 메시지 다이어로그 생성
+					JOptionPane.showMessageDialog(null, "해당 프로토콜은 준비 중입니다.", "준비 중",
+							JOptionPane.ERROR_MESSAGE);
 					break;
 
 				case "null3":
-					System.out.println("ICMP");
+					// 경고 메시지 다이어로그 생성
+					JOptionPane.showMessageDialog(null, "해당 프로토콜은 준비 중입니다.", "준비 중",
+							JOptionPane.ERROR_MESSAGE);
 					break;
 					
 				default:
