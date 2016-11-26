@@ -23,8 +23,8 @@ public class Main {
 	 */
 	static {
 		try {
-			System.load(new File("jpcap.dll").getAbsolutePath());
-			System.out.println(new File("jpcap.dll").getAbsolutePath());
+			System.load(new File("Lib/jpcap.dll").getAbsolutePath());
+			System.out.println(new File("Lib/jpcap.dll").getAbsolutePath());
 		} catch (UnsatisfiedLinkError e) {
 			System.out.println("Native code library failed to load.\n" + e);
 			System.exit(1);
