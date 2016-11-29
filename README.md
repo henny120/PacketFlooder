@@ -1,4 +1,4 @@
-# PacketFlooder
+﻿# PacketFlooder
 jpcap(+winpcap) 을 이용한 PacketFlooder GUI Tool 입니다. 
 
 
@@ -20,12 +20,12 @@ jpcap(+winpcap) 을 이용한 PacketFlooder GUI Tool 입니다.
  
 # 추후 업데이트할 사항
 1. 공통  
-1) 전송 패킷 수 : 무한대(Infinity) 지원 추가할 것  
+1) 전송 패킷 수 : 무한대(Infinity) 지원 추가할 것 - 16.11.29 완료  
 2) 생성되는 패킷의 세부 사용자정의 기능(Ethenet header, Ip Header, Protocol Header) 지원 추가할 것  
 2. SYN Flooding Attack  
 1) ..  
 3. UDP Flooding Attack  
-1) Payload(data) 사용자정의 기능 추가할 것
+1) Payload(data) 사용자정의 기능 추가할 것 - 16.11.29 완료 
 	
 # 그 외..
 연구, 스터디 목적 외 악의적으로 사용하지 마시기 바랍니다 - 명우니닷컴(http://myeonguni.com)
