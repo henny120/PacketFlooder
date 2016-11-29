@@ -275,17 +275,25 @@ public class PF_GUI_Resource
 		// 초기 데이타 선택 설정
 		m_rdbtn_text.setSelected(true);
 
+		// data : random 타입 추후 지원 예정
+		m_rdbtn_random.setEnabled(false);
+		m_tf_random1.setEnabled(false);
+		m_tf_random2.setEnabled(false);
+		m_lbl_random1.setEnabled(false);
+		m_lbl_random2.setEnabled(false);
+		
 		// Random : 바이트 크기 입력창 설정 1
 		m_tf_random1.setColumns(10);
-		m_tf_random1.disable();
+		m_tf_random1.setEnabled(false);
 		m_tf_random1.setBounds(103, 292, 58, 21);
 		
 		// Random : 바이트 크기 입력창설정 2
 		m_tf_random2.setColumns(10);
-		m_tf_random2.disable();
+		m_tf_random2.setEnabled(false);
 		m_tf_random2.setBounds(180, 292, 58, 21);
 		
 		// Random : 바이트 크기 라벨 설정 1
+		m_lbl_random1.setBounds(165, 295, 26, 15);
 		m_lbl_random1.setBounds(165, 295, 26, 15);
 		
 		// Random : 바이트 크기 라벨 설정 2
@@ -293,15 +301,16 @@ public class PF_GUI_Resource
 		
 		// Text : 텍스트 입력창 설정
 		m_tf_text.setText("*** myeonguni.com ***");
-		m_tf_file.enable();
+		m_tf_file.setEnabled(true);
 		m_tf_text.setBounds(103, 317, 282, 21);
 		
 		// File : Open 버튼 설정
+		m_btn_file.setEnabled(false);
 		m_btn_file.setBounds(103, 341, 63, 23);
 		
 		// File : FileName 텍스트필드 설정
 		m_tf_file.setBackground(SystemColor.info);
-		m_tf_file.disable();
+		m_tf_file.setEnabled(false);
 		m_tf_file.setBounds(172, 342, 212, 21);
 		
 		/*

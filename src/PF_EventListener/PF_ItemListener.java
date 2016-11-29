@@ -23,28 +23,28 @@ public class PF_ItemListener implements ItemListener {
 
 			// Random 라디오 버튼을 선택하였을 경우
 			if (item.equals("Random")) {
-				PF_GUI_Resource.get_Instance().m_tf_random1.enable();
-				PF_GUI_Resource.get_Instance().m_tf_random2.enable();
-				PF_GUI_Resource.get_Instance().m_tf_text.disable();
-				PF_GUI_Resource.get_Instance().m_tf_file.disable();
+				PF_GUI_Resource.get_Instance().m_tf_random1.setEnabled(true);
+				PF_GUI_Resource.get_Instance().m_tf_random2.setEnabled(true);
+				PF_GUI_Resource.get_Instance().m_tf_text.setEnabled(false);
+				PF_GUI_Resource.get_Instance().m_btn_file.setEnabled(false);
 				PF_GUI_Resource.get_Instance().m_contentPane.revalidate();
 				PF_GUI_Resource.get_Instance().m_contentPane.repaint(); 
 			}
 			// Text 라디오 버튼을 선택하였을 경우
 			else if (item.equals("Text")) {
-				PF_GUI_Resource.get_Instance().m_tf_text.enable();
-				PF_GUI_Resource.get_Instance().m_tf_random1.disable();
-				PF_GUI_Resource.get_Instance().m_tf_random2.disable();
-				PF_GUI_Resource.get_Instance().m_tf_file.disable();
+				PF_GUI_Resource.get_Instance().m_tf_text.setEnabled(true);
+				PF_GUI_Resource.get_Instance().m_tf_random1.setEnabled(false);
+				PF_GUI_Resource.get_Instance().m_tf_random2.setEnabled(false);
+				PF_GUI_Resource.get_Instance().m_btn_file.setEnabled(false);
 				PF_GUI_Resource.get_Instance().m_contentPane.revalidate();
 				PF_GUI_Resource.get_Instance().m_contentPane.repaint(); 
 			}
 			// File 라디오 버튼을 선택하였을 경우
 			else if (item.equals("File")) {
-				PF_GUI_Resource.get_Instance().m_tf_file.enable();
-				PF_GUI_Resource.get_Instance().m_tf_text.disable();
-				PF_GUI_Resource.get_Instance().m_tf_random1.disable();
-				PF_GUI_Resource.get_Instance().m_tf_random2.disable();
+				PF_GUI_Resource.get_Instance().m_btn_file.setEnabled(true);
+				PF_GUI_Resource.get_Instance().m_tf_text.setEnabled(false);
+				PF_GUI_Resource.get_Instance().m_tf_random1.setEnabled(false);
+				PF_GUI_Resource.get_Instance().m_tf_random2.setEnabled(false);
 				PF_GUI_Resource.get_Instance().m_contentPane.revalidate();
 				PF_GUI_Resource.get_Instance().m_contentPane.repaint(); 
 			} else {

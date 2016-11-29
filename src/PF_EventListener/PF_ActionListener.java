@@ -26,7 +26,13 @@ public class PF_ActionListener implements ActionListener {
 
 	/** pkts Speed 입력 값 **/
 	private int speed;
+	
+	/** data type 설정 값 **/
+	private String dataType;
 
+	/** data 입력 값 **/
+	private String data;
+	
 	/** IP Address 유효성 검사 변수 선언 **/
 	private final Pattern regIp = Pattern.compile("^(([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.){3}([01]?\\d\\d?|2[0-4]\\d|25[0-5])$");
 
@@ -77,6 +83,58 @@ public class PF_ActionListener implements ActionListener {
 
 		// Speed 입력 값 설정(Infinity일 경우 → 999999 / 아닐 경우 입력 값)
 		speed = (PF_GUI_Resource.get_Instance().m_tf_speed.getText().equals("Infinity")) ? 999999 : Integer.parseInt(PF_GUI_Resource.get_Instance().m_tf_speed.getText());
+
+		// data type 값 설정
+		for (Enumeration<AbstractButton> buttons = PF_GUI_Resource.get_Instance().m_rdbtnGroup_dataType
+				.getElements(); buttons.hasMoreElements();) {
+			AbstractButton button = buttons.nextElement();
+
+			// 선택된 data type radio btn 일 경우 
+			if (button.isSelected()) {
+				// Random Type 일 경우
+				if (button.getText().equals("Random")) {
+					dataType = "Random";
+				}
+				// Text Type 일 경우
+				else if (button.getText().equals("Text")) {
+					dataType = "Text";
+				}
+				// File Type 일 경우
+				else if (button.getText().equals("File")) {
+					dataType = "File";
+				}
+				else {
+					
+				}
+				
+				// loop 종료
+				break;
+			}
+		}
+		
+		/*
+		 *  data 입력 갑 설정
+		 *  data type에 따라 각각 상이함
+		 */
+		if (dataType.equals("Random"))
+		{
+			// 추후 개발 예정...
+		}
+		else if (dataType.equals("Text"))
+		{
+			// 입력된 텍스트 값을 data에 설정
+			data = PF_GUI_Resource.get_Instance().m_tf_text.getText();
+			
+		}
+		else if (dataType.equals("File"))
+		{
+			// 선택된 파일의 내용을 data에 설정
+			data = PF_GUI_Resource.get_Instance().m_tf_file.getText();
+		}
+		else
+		{
+			
+		}
 		
 		
 		// Packet Flooder 시작 전 유효성 체크
@@ -122,6 +180,36 @@ public class PF_ActionListener implements ActionListener {
 			PF_GUI_Resource.get_Instance().m_tf_port.grabFocus();
 
 		}
+		// Data 값이 유효하지 않을 경우
+		else if (data.equals(""))
+		{
+			if (dataType.equals("Random"))
+			{
+				// 추후 개발 예정...
+			}
+			else if (dataType.equals("Text"))
+			{
+				// 에러 메시지 다이어로그 생성
+				JOptionPane.showMessageDialog(null, "데이타 텍스트 값을 입력해주세요.", "실행 오류",
+						JOptionPane.ERROR_MESSAGE);
+
+				// Data text Text Field 포커스 설정
+				PF_GUI_Resource.get_Instance().m_tf_text.grabFocus();
+			}
+			else if (dataType.equals("File"))
+			{
+				// 에러 메시지 다이어로그 생성
+				JOptionPane.showMessageDialog(null, "데이타 파일을 선택해주세요.", "실행 오류",
+						JOptionPane.ERROR_MESSAGE);
+
+				// Data file Text Field 포커스 설정
+				PF_GUI_Resource.get_Instance().m_tf_file.grabFocus();
+			}
+			else
+			{
+				
+			}
+		}
 		// 유효성 체크에 걸리지 않은 경우
 		else
 		{
@@ -164,7 +252,7 @@ public class PF_ActionListener implements ActionListener {
 					PF_SendUDP udpSet = new PF_SendUDP();
 					
 					// UDP Flooder 설정에 성공하였을 경우
-					if (udpSet.set_PF_SendUDP(ip, port, speed)) // BOOLEAN 형태로 리턴 된다.
+					if (udpSet.set_PF_SendUDP(ip, port, speed, data)) // BOOLEAN 형태로 리턴 된다.
 					{					
 						// 시작 버튼을 비활성화
 						PF_GUI_Resource.get_Instance().m_btn_flooder_Start.setEnabled(false);

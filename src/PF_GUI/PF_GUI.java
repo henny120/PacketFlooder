@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 
 import PF_EventListener.PF_ActionListener;
 import PF_EventListener.PF_ChangeListener;
+import PF_EventListener.PF_FileOpenListener;
 import PF_EventListener.PF_ItemListener;
 import PF_EventListener.PF_KeyListener;
 
@@ -202,6 +203,10 @@ public class PF_GUI extends JFrame
 		m_RESOURCE.m_rdbtn_random.addItemListener(new PF_ItemListener());
 		m_RESOURCE.m_rdbtn_text.addItemListener(new PF_ItemListener());
 		m_RESOURCE.m_rdbtn_file.addItemListener(new PF_ItemListener());
+		
+		// data file type Open 버튼에 이벤트 등록
+		m_RESOURCE.m_btn_file.addActionListener(new PF_FileOpenListener());
+		
 		
 	}
 
