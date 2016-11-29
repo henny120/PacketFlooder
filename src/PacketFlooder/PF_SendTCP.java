@@ -72,6 +72,9 @@ public class PF_SendTCP implements Runnable {
 	/** 패킷 전송이 지속된 시간 **/
 	private int m_seconds;
 	
+	/** 초당 반복을 위해 시간 측정 시작 **/
+	private long m_sysNanoTime_start;
+
 	
 	/**
 	 * TCP Flooder의 정보를 셋팅하는 메소드 지정된 디바이스가 있을 경우에만 true를 리턴
@@ -219,26 +222,58 @@ public class PF_SendTCP implements Runnable {
 		ether.dst_mac = m_des_mac;
 		packet.datalink = ether;
 
-		
+
+
 		// 전송에 성공한 누적 패킷 수 초기화
 		m_pktsCount = 0;
 		
-		/*
-		 * 패킷을 전송하는 loop
-		 */
-		for (int i=0; i<m_pktsNum; i++)
-		{
-			// 패킷 전송
-			sender.sendPacket(packet);
-			
-			// 전송에 성공한 누적 패킷 수 실시간 출력
-			PF_GUI_Resource.get_Instance().m_lbl_sendPackets.setText(String.valueOf(++m_pktsCount));
+		// 전송 누적 시간 초기화
+		m_seconds = 0;
+
+		// 누적 전송 시간 초기화 값을 디스플레이 해줌
+		PF_GUI_Resource.get_Instance().m_lbl_elapsedSeconds.setText(String.valueOf(m_seconds));
 		
+		
+		while (true) {
+
+			// 시간 측정 시작
+			m_sysNanoTime_start = System.nanoTime();
+			
+			/*
+			 * 초당 전송해야할 패킷수 만큼 패킷을 전송하는 loop
+			 */
+			for (int i=0; i<m_pktsNum; i++)
+			{
+				// 패킷 전송
+				sender.sendPacket(packet);
+				
+				// 전송에 성공한 누적 패킷 수 실시간 출력
+				PF_GUI_Resource.get_Instance().m_lbl_sendPackets.setText(String.valueOf(++m_pktsCount));
+			
+				// Stop 버튼을 클릭하여 interrupt 메소드를 호출하였을 경우
+				if (Thread.currentThread().isInterrupted()) {
+					// 패킷 전송을 정지함
+					break;
+				}
+			}
+			
 			// Stop 버튼을 클릭하여 interrupt 메소드를 호출하였을 경우
 			if (Thread.currentThread().isInterrupted()) {
 				// 패킷 전송을 정지함
 				break;
 			}
+
+			/*
+			 * 시간 측정 값이 1초가 지나지 않았을 경우 1초가 지날때까지 체크하는 무한로프
+			 */
+			while (((System.nanoTime() - m_sysNanoTime_start) / 1000000000.0) <= 1) {
+				// 측정 시작부터 현재까지 걸린 시간
+				System.out.println(((System.nanoTime() - m_sysNanoTime_start) / 1000000000.0));
+			}
+			
+			// 누적 전송 시간을 실시간으로 디스플레이 해줌
+			PF_GUI_Resource.get_Instance().m_lbl_elapsedSeconds.setText(String.valueOf(++m_seconds));
+					
 		}
 		
 		// 패킷 전송이 완료된 경우 - 시작 버튼 활성화 : 정비 버튼 비활성화
