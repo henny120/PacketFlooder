@@ -233,7 +233,10 @@ public class PF_SendTCP implements Runnable {
 		// 누적 전송 시간 초기화 값을 디스플레이 해줌
 		PF_GUI_Resource.get_Instance().m_lbl_elapsedSeconds.setText(String.valueOf(m_seconds));
 		
-		
+
+		/*
+		 * 초당 사용자가 설정한 수만큼 패킷을 전송을 하는 무한루프
+		 */
 		while (true) {
 
 			// 시간 측정 시작
@@ -241,25 +244,28 @@ public class PF_SendTCP implements Runnable {
 			
 			/*
 			 * 초당 전송해야할 패킷수 만큼 패킷을 전송하는 loop
+			 * loop 종료 조건1) 사용자가 설정한 수만큼 반복을 끝냈거나
+			 * loop 종료 조건2) 1초를 지났거나
+			 * loop 종료 조건3) Stop 버튼을 클릭하였을 경우
 			 */
-			for (int i=0; i<m_pktsNum; i++)
+			for (int i=0; i<m_pktsNum && ((System.nanoTime() - m_sysNanoTime_start) / 1000000000.0) <= 1; i++)
 			{
 				// 패킷 전송
 				sender.sendPacket(packet);
 				
 				// 전송에 성공한 누적 패킷 수 실시간 출력
 				PF_GUI_Resource.get_Instance().m_lbl_sendPackets.setText(String.valueOf(++m_pktsCount));
-			
+	
 				// Stop 버튼을 클릭하여 interrupt 메소드를 호출하였을 경우
 				if (Thread.currentThread().isInterrupted()) {
-					// 패킷 전송을 정지함
+					// 패킷 전송 loop를 정지함
 					break;
 				}
 			}
 			
 			// Stop 버튼을 클릭하여 interrupt 메소드를 호출하였을 경우
 			if (Thread.currentThread().isInterrupted()) {
-				// 패킷 전송을 정지함
+				// 초를 체크하는 무한 loop를 정지함
 				break;
 			}
 

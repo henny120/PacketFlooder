@@ -5,6 +5,7 @@ import java.awt.SystemColor;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -15,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 
 /**
@@ -95,6 +97,46 @@ public class PF_GUI_Resource
 	public JSlider m_slider_speed = new JSlider();
 	
 		
+	/** 데이타 라벨 **/
+	public JLabel m_lbl_data = new JLabel("");
+
+	/** 데이터 타입 라디오버튼 그룹 **/
+	public ButtonGroup  m_rdbtnGroup_dataType = new ButtonGroup();
+	
+	/** 데이터 타입 : Random 라디오 버튼 **/
+	public JRadioButton m_rdbtn_random = new JRadioButton("Random");
+
+	/** 데이터 타입 : Text 라디오 버튼 **/
+	public JRadioButton m_rdbtn_text = new JRadioButton("Text");
+
+	/** 데이터 타입 : File 라디오 버튼 **/
+	public JRadioButton m_rdbtn_file = new JRadioButton("File");
+	
+	/** Random : setByteSize 라벨 1 **/
+	public JLabel m_lbl_random1 = new JLabel("to");
+
+	/** Random : setByteSize 라벨 2 **/
+	public JLabel m_lbl_random2 = new JLabel("bytes");
+	
+	/** Random : setByteSize 텍스트필드 1 **/
+	public JTextField m_tf_random1 = new JTextField();
+
+	/** Random : setByteSize 텍스트필드 2 **/
+	public JTextField m_tf_random2 = new JTextField();
+	
+	/** Text : setText 텍스트필드 **/
+	public JTextField m_tf_text = new JTextField();
+
+	/** File : FileOpen 버튼 **/
+	public JButton m_btn_file = new JButton("Open");
+	
+	/** File : FileName 텍스트필드 **/
+	public JTextField m_tf_file = new JTextField();
+
+	/** File : FileChooser **/
+	public JFileChooser m_fc_file = new JFileChooser(".");
+	
+	
 	/** 상태 라벨 **/
 	public JLabel m_lbl_status = new JLabel("");
 	
@@ -208,39 +250,98 @@ public class PF_GUI_Resource
 		m_slider_speed.setBounds(141, 230, 240, 23);
 
 		// 전송제어 스피드 입력창 설정
-		m_tf_speed.setBounds(47, 230, 58, 21);
+		m_tf_speed.setBounds(44, 227, 58, 25);
 		m_tf_speed.setBackground(SystemColor.info);
 		m_tf_speed.setColumns(6);
 		m_tf_speed.setText(String.valueOf(m_slider_speed.getValue()));
+		
+		
+		// 데이타 설정
+		m_lbl_data.setBorder(new TitledBorder(new LineBorder(new Color(180, 180, 180)), "Data(UDP Only)", TitledBorder.CENTER,
+				TitledBorder.TOP, null, new Color(0, 0, 0)));
+		m_lbl_data.setBackground(SystemColor.menu);
+		m_lbl_data.setBounds(12, 271, 384, 108);
+
+		// 각 데이타 라디오버튼 그룹에 추가
+		m_rdbtnGroup_dataType.add(m_rdbtn_random);
+		m_rdbtnGroup_dataType.add(m_rdbtn_text);
+		m_rdbtnGroup_dataType.add(m_rdbtn_file);
+		
+		// 각 데이타 라디오버튼 설정
+		m_rdbtn_random.setBounds(26, 291, 80, 23);
+		m_rdbtn_text.setBounds(26, 316, 50, 23);
+		m_rdbtn_file.setBounds(26, 341, 50, 23);
+		
+		// 초기 데이타 선택 설정
+		m_rdbtn_text.setSelected(true);
+
+		// Random : 바이트 크기 입력창 설정 1
+		m_tf_random1.setColumns(10);
+		m_tf_random1.disable();
+		m_tf_random1.setBounds(103, 292, 58, 21);
+		
+		// Random : 바이트 크기 입력창설정 2
+		m_tf_random2.setColumns(10);
+		m_tf_random2.disable();
+		m_tf_random2.setBounds(180, 292, 58, 21);
+		
+		// Random : 바이트 크기 라벨 설정 1
+		m_lbl_random1.setBounds(165, 295, 26, 15);
+		
+		// Random : 바이트 크기 라벨 설정 2
+		m_lbl_random2.setBounds(242, 295, 44, 15);
+		
+		// Text : 텍스트 입력창 설정
+		m_tf_text.setText("*** myeonguni.com ***");
+		m_tf_file.enable();
+		m_tf_text.setBounds(103, 317, 282, 21);
+		
+		// File : Open 버튼 설정
+		m_btn_file.setBounds(103, 341, 63, 23);
+		
+		// File : FileName 텍스트필드 설정
+		m_tf_file.setBackground(SystemColor.info);
+		m_tf_file.disable();
+		m_tf_file.setBounds(172, 342, 212, 21);
+		
+		/*
+		 *  FileChooser : 파일 선택 버튼 설정
+		 *  DoubleBuffered 사용
+		 *  MultiSelection 불가
+		 *  FileFilter txt
+		 */
+		m_fc_file.setDoubleBuffered(true);
+		m_fc_file.setMultiSelectionEnabled(false);
+		m_fc_file.setFileFilter(new FileNameExtensionFilter("Text File", "txt"));
 		
 		
 		// 상태 설정
 		m_lbl_status.setBorder(new TitledBorder(new LineBorder(new Color(180, 180, 180)), "Status", TitledBorder.CENTER,
 				TitledBorder.TOP, null, new Color(0, 0, 0)));
 		m_lbl_status.setBackground(SystemColor.menu);
-		m_lbl_status.setBounds(12, 271, 274, 64); //351
+		m_lbl_status.setBounds(12, 386, 274, 64);
 				
 		// 상태 전송 패킷 수 안내 라벨 설정
-		m_lbl_sendPacketsLbl.setBounds(61, 290, 162, 15);
+		m_lbl_sendPacketsLbl.setBounds(61, 405, 162, 15);
 		
 		// 상태 전송 패킷 수 라벨 설정
-		m_lbl_sendPackets.setBounds(177, 290, 150, 15);
+		m_lbl_sendPackets.setBounds(177, 405, 150, 15);
 
 		// 상태 전송 시간 안내 라벨 설정
-		m_lbl_elapsedSecondsLbl.setBounds(61, 310, 105, 15);
+		m_lbl_elapsedSecondsLbl.setBounds(61, 425, 105, 15);
 		
 		// 상태 전송 시간 라벨 설정
-		m_lbl_elapsedSeconds.setBounds(177, 310, 22, 15);
+		m_lbl_elapsedSeconds.setBounds(177, 425, 22, 15);
 		
 
 		// 패킷 플루더 시작 버튼 설정
-		m_btn_flooder_Start.setBounds(298, 279, 97, 23);
+		m_btn_flooder_Start.setBounds(298, 394, 97, 23);
 
 		// 패킷 플루더 시작 버튼 활성화
 		m_btn_flooder_Start.setEnabled(true);
 		
 		// 패킷 플루더 정지 버튼 설정
-		m_btn_flooder_Stop.setBounds(299, 310, 97, 23);
+		m_btn_flooder_Stop.setBounds(299, 425, 97, 23);
 		
 		// 패킷 플루더 정지 버튼 비활성화
 		m_btn_flooder_Stop.setEnabled(false);

@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 
 import PF_EventListener.PF_ActionListener;
 import PF_EventListener.PF_ChangeListener;
+import PF_EventListener.PF_ItemListener;
 import PF_EventListener.PF_KeyListener;
 
 
@@ -62,7 +63,7 @@ public class PF_GUI extends JFrame
 		
 		// Jframe 설정 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setBounds(100, 100, 425, 400);
+		this.setBounds(100, 100, 425, 500);
 		this.setContentPane(m_RESOURCE.m_contentPane);
 		
 		
@@ -121,6 +122,40 @@ public class PF_GUI extends JFrame
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_slider_speed);
 
 		
+		// Data label 등록
+		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_lbl_data);
+		
+		// Random Data Radio btn 등록
+		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_rdbtn_random);
+		
+		// Text Data Radio btn 등록
+		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_rdbtn_text);
+
+		// File Data Radio btn 등록
+		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_rdbtn_file);
+		
+		// Random 바이트 크기 입력창 1 등록
+		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_tf_random1);
+
+		// Random 바이트 크기 입력창 2 등록
+		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_tf_random2);
+
+		// Random 바이트 크기 안내 라벨 1 등록
+		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_lbl_random1);
+
+		// Random 바이트 크기 안내 라벨 2 등록
+		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_lbl_random2);
+		
+		// Text 텍스트 입력창 등록
+		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_tf_text);
+		
+		// File Open 버튼 등록
+		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_btn_file);
+		
+		// File FileName 텍스트필드 등록
+		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_tf_file);
+		
+		
 		// Status label 등록
 		m_RESOURCE.m_contentPane.add(m_RESOURCE.m_lbl_status);
 		
@@ -163,19 +198,11 @@ public class PF_GUI extends JFrame
 		// Speed 슬라이더에 이벤트 등록
 		m_RESOURCE.m_slider_speed.addChangeListener(new PF_ChangeListener());
 		
+		// data type 라디오 버튼에 이벤트 등록 
+		m_RESOURCE.m_rdbtn_random.addItemListener(new PF_ItemListener());
+		m_RESOURCE.m_rdbtn_text.addItemListener(new PF_ItemListener());
+		m_RESOURCE.m_rdbtn_file.addItemListener(new PF_ItemListener());
 		
-		/*
-		.addChangeListener(new SliderListener());
-		...
-		class SliderListener implements ChangeListener {
-		    public void stateChanged(ChangeEvent e) {
-		        JSlider source = (JSlider)e.getSource();
-		        if (!source.getValueIsAdjusting()) {
-		            int fps = (int)source.getValue();
-		            ...
-		        }    
-		    }
-		}*/
 	}
 
 }

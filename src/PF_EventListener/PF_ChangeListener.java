@@ -17,8 +17,13 @@ public class PF_ChangeListener implements ChangeListener {
 
 		JSlider source = (JSlider) e.getSource();
 
-		// Speed TextField 값을 변경 된 Speed Silder 값으로 설정 
-		PF_GUI_Resource.get_Instance().m_tf_speed.setText(String.valueOf(source.getValue()));
+		if (source.getValue() == 100000) {
+			// Speed TextField 값을 무한대(Infinity) 값으로 설정 
+			PF_GUI_Resource.get_Instance().m_tf_speed.setText("Infinity");
+		} else {
+			// Speed TextField 값을 변경 된 Speed Silder 값으로 설정 
+			PF_GUI_Resource.get_Instance().m_tf_speed.setText(String.valueOf(source.getValue()));
+		}
 
 	}
 

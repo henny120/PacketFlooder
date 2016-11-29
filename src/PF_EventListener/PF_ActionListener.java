@@ -75,9 +75,9 @@ public class PF_ActionListener implements ActionListener {
 		// Port Number 입력 값 설정
 		port = PF_GUI_Resource.get_Instance().m_tf_port.getText();
 
-		// Speed 입력 값 설정
-		speed = Integer.parseInt(PF_GUI_Resource.get_Instance().m_tf_speed.getText());
-
+		// Speed 입력 값 설정(Infinity일 경우 → 999999 / 아닐 경우 입력 값)
+		speed = (PF_GUI_Resource.get_Instance().m_tf_speed.getText().equals("Infinity")) ? 999999 : Integer.parseInt(PF_GUI_Resource.get_Instance().m_tf_speed.getText());
+		
 		
 		// Packet Flooder 시작 전 유효성 체크
 		if (ip.equals("") || port.equals(""))

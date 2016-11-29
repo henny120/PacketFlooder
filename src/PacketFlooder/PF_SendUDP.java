@@ -221,11 +221,14 @@ public class PF_SendUDP implements Runnable {
 
 			// 시간 측정 시작
 			m_sysNanoTime_start = System.nanoTime();
-		
+			
 			/*
-			 * 패킷을 전송하는 loop
+			 * 초당 전송해야할 패킷수 만큼 패킷을 전송하는 loop
+			 * loop 종료 조건1) 사용자가 설정한 수만큼 반복을 끝냈거나
+			 * loop 종료 조건2) 1초를 지났거나
+			 * loop 종료 조건3) Stop 버튼을 클릭하였을 경우
 			 */
-			for(int i=0; i<m_pktsNum; i++)
+			for (int i=0; i<m_pktsNum && ((System.nanoTime() - m_sysNanoTime_start) / 1000000000.0) <= 1; i++)
 			{
 				// 패킷 전송
 				sender.sendPacket(packet);
